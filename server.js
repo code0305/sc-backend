@@ -22,6 +22,10 @@ app.use("/auth",router);
 app.use("/post",PostRouter);
 app.use("/uploads",express.static("uploads"));
 const PORT = process.env.PORT;
+app.get("/hello", (req, res) => {
+    res.send("Hello, World!");
+});
+
 app.listen(PORT,()=>{
     connectDb();
     console.log(`Server is running in http://localhost:${process.env.PORT}`)
