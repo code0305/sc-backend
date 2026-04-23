@@ -84,10 +84,20 @@ export const login = async(req,res)=>{
             return res.status(400).json({success:false,message:"Invalid Password"})
         }
         const token = await jwt.sign({id:ExistingUser._id,name:ExistingUser.name},process.env.SECRET_KEY,{expiresIn:"7d"})
-        res.cookie("mycookie",token,{httpOnly:true,secure:false,samesite:'lax',maxAge:7*24*60*60*1000})
-        res.status(200).json({success:true,message:"SucessFully Logged In"})
+        res.cookie("mycookie",token,{httpOnly:true,secure:false,sameSite:'lax',maxAge:7*24*60*60*1000})
+        res.status(200).json({success:true,message:"SucessFully Logged In",token})
     } catch (error) {
         console.log(error)
         res.status(400).json({success:false,message:"Login"+error})
     }
+}
+
+export const me =async(req,res)=>{
+    try {
+        const user = req.user;
+        res.status(200).json({success:true,message:"User Found",data:user})
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({success:false,message:"Error in Fetching User"})
+    } 
 }
