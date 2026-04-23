@@ -84,7 +84,7 @@ export const login = async(req,res)=>{
             return res.status(400).json({success:false,message:"Invalid Password"})
         }
         const token = await jwt.sign({id:ExistingUser._id,name:ExistingUser.name},process.env.SECRET_KEY,{expiresIn:"7d"})
-        res.cookie("mycookie",token,{httpOnly:true,secure:false,sameSite:'lax',maxAge:7*24*60*60*1000})
+        res.cookie("mycookie",token,{httpOnly:true,secure:true,sameSite:'lax',maxAge:7*24*60*60*1000})
         res.status(200).json({success:true,message:"SucessFully Logged In",token})
     } catch (error) {
         console.log(error)

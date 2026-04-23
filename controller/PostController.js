@@ -135,6 +135,25 @@ export const createPost=async (req,res) => {
     }
 }
 
+export const likePost=async(req,res)=>{
+    try {
+        const userId=req.user.id;
+        const postId=req.params.id;
+        await Post.findByIdAndUpdate(postId,{
+            $push:{
+                likes: {
+                    likedBy:userId
+                }
+            }
+        },{new:true})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success:false,
+            message:"Internal Server Error"
+        })
+    }
+}
 ///route parameter : in Routing ,   in query nedd not write in Routing 
 
 

@@ -10,7 +10,7 @@ import PostRouter from "./router/postRoute.js";
 const app = express();
 
 app.use(cors({
-    origin:['http://localhost:5173/','http://localhost:5174/'], 
+    origin:['https://social-w4pa.vercel.app','http://localhost:5173'], 
     credentials:true
 }));
 
@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use("/auth",router);
 app.use("/post",PostRouter);
 app.use("/uploads",express.static("uploads"));
+
 const PORT = process.env.PORT;
 app.get("/hello", (req, res) => {
     res.send("Hello, World!");
@@ -28,15 +29,8 @@ app.get("/hello", (req, res) => {
 
 app.listen(PORT,()=>{
     connectDb();
-    console.log(`Server is running in http://localhost:${process.env.PORT}`)
+    console.log(`Server is running in http://localhost:${PORT}`)
 })
-
-
-
-
-
-
-
 
 
 //package.json scripts module  
