@@ -9,10 +9,12 @@ import PostRouter from "./router/postRoute.js";
 
 const app = express();
 
-app.use(cors({
-    origin:['https://social-w4pa.vercel.app','http://localhost:5173'], 
-    credentials:true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
